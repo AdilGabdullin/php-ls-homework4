@@ -15,10 +15,4 @@ if (!preg_match('/\d+\.(bmp|gif|jpg|png|svg)/', $toDelete)) {
 $query = "UPDATE users SET photo=NULL WHERE photo=?";
 $dbh->prepare($query)->execute([$toDelete]);
 unlink('../photos/' . $toDelete);
-echo <<<EOD
-<html>
-  <head>
-    <meta http-equiv='Refresh' content='0; URL="{$_SERVER['HTTP_REFERER']}"'>
-  </head>
-</html>
-EOD;
+header('Location: /filelist.html');

@@ -11,14 +11,10 @@ $query = "SELECT photo FROM users WHERE id = ?";
 $stmt = $dbh->prepare($query);
 $stmt->execute([$toDelete]);
 $result = $stmt->fetch(pdo::FETCH_ASSOC);
-unlink('../photos/' . $result['photo']);
+if ($result['photo'] != '') {
+    unlink('../photos/' . $result['photo']);
+}
 //Удаляем запись из базы
 $query = "DELETE FROM users WHERE id = ?";
 $dbh->prepare($query)->execute([$toDelete]);
-echo <<<EOD
-<html>
-  <head>
-    <meta http-equiv='Refresh' content='0; URL="{$_SERVER['HTTP_REFERER']}"'>
-  </head>
-</html>
-EOD;
+header('Location: /list.html');
