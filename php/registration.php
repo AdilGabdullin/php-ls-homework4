@@ -19,6 +19,8 @@ if ($_POST['password1'] !== $_POST['password2']) {
     die;
 }
 //Проверка картинки
+$extension = null;
+$imageSent = false;
 if (!is_null($_FILES['img'])) {
     $tmp_name = $_FILES['img']['tmp_name'];
     $extension = preg_replace('/.*\./', '', $_FILES['img']['name']);
@@ -37,10 +39,6 @@ if (!is_null($_FILES['img'])) {
         die;
     }
     $imageSent = true;
-} else {
-    //Картинка не отправлена
-    $extension = null;
-    $imageSent = false;
 }
 
 //Добавляем нового пользователя
