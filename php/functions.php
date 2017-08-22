@@ -25,3 +25,8 @@ function checkImage($fileArray, &$extension)
     }
     return true;
 }
+
+function blowFishHash($s)
+{
+    return password_hash($s, PASSWORD_BCRYPT, ['salt' => '@W#YG6yYqHA?{S4#Rvx{vn']);
+}

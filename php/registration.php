@@ -26,7 +26,7 @@ VALUES(?, ?, ?, ?, ?);
 EOL;
 $values = [
     strip_tags($_POST['login']),
-    password_hash($_POST['password1'], PASSWORD_BCRYPT),
+    blowFishHash($_POST['password1']),
     strip_tags($_POST['name']),
     filter_var($_POST['age'], FILTER_VALIDATE_INT),
     htmlspecialchars($_POST['description'])
