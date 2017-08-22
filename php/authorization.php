@@ -1,6 +1,5 @@
 <?php
 require 'config.php';
-$dbh = new PDO(DSN, DB_USER, DB_PASSWORD);
 $login = $_POST['login'];
 $password = $_POST['password'];
 $stmt = $dbh->prepare("SELECT * FROM users WHERE login = ?");

@@ -4,7 +4,6 @@ if ($_SESSION['access'] !== 'granted') {
     die;
 }
 require 'config.php';
-$dbh = new PDO(DSN, DB_USER, DB_PASSWORD);
 $toDelete = $_GET['delete'];
 
 if (!preg_match('/\d+\.(bmp|gif|jpg|png|svg)/', $toDelete)) {

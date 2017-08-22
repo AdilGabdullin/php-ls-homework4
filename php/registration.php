@@ -1,7 +1,6 @@
 <?php
 require_once 'functions.php';
 require 'config.php';
-$dbh = new PDO(DSN, DB_USER, DB_PASSWORD);
 
 // Проверка уникальности
 $stmt = $dbh->prepare("SELECT COUNT(*) FROM users WHERE login = ?");

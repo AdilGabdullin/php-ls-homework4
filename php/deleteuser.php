@@ -4,7 +4,6 @@ if ($_SESSION['access'] !== 'granted') {
     die;
 }
 require 'config.php';
-$dbh = new PDO(DSN, DB_USER, DB_PASSWORD);
 $toDelete = $_GET['delete'];
 //Удаляем файл картинки
 $query = "SELECT photo FROM users WHERE id = ?";
