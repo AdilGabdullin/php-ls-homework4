@@ -1,8 +1,6 @@
 <?php
+require_once 'functions.php';
 require 'config.php';
-$acceptableExtensions = ['bmp', 'gif', 'jpg', 'png', 'svg'];
-define('MAX_FILE_SIZE', 5);
-
 $dbh = new PDO(DSN, DB_USER, DB_PASSWORD);
 
 // Проверка уникальности
@@ -19,27 +17,7 @@ if ($_POST['password1'] !== $_POST['password2']) {
     die;
 }
 //Проверка картинки
-$extension = null;
-$imageSent = false;
-if (!is_null($_FILES['img'])) {
-    $tmp_name = $_FILES['img']['tmp_name'];
-    $extension = preg_replace('/.*\./', '', $_FILES['img']['name']);
-    $extension = strtolower($extension);
-    if (!in_array($extension, $acceptableExtensions)) {
-        echo 'Неверное расширение файла';
-        die;
-    }
-    $type = mime_content_type($tmp_name);
-    if (substr($type, 0, 5) !== 'image') {
-        echo 'Это не картинка!!!';
-        die;
-    }
-    if (filesize($tmp_name) > MAX_FILE_SIZE * 1024 ** 2) {
-        echo 'Размер файла - не более ' . MAX_FILE_SIZE . 'МБ';
-        die;
-    }
-    $imageSent = true;
-}
+$imageSent = checkImage($_FILES['img'], $extension);
 
 //Добавляем нового пользователя
 $query = <<<'EOL'
